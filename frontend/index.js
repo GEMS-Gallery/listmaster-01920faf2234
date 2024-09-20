@@ -9,9 +9,29 @@ async function init() {
   const list = document.getElementById('item-list');
 
   const categories = {
-    'Bakery': ['Bread', 'Muffins', 'Hamburger Buns'],
-    'Dairy': ['Milk', 'Cheese']
+    'Bakery': ['Bread', 'Muffins', 'Bagels', 'Croissants', 'Hamburger Buns', 'Donuts', 'Pies', 'Cakes', 'Cookies'],
+    'Dairy': ['Milk', 'Cheese', 'Butter', 'Yogurt', 'Cream', 'Eggs', 'Ice Cream'],
+    'Produce': ['Apples', 'Bananas', 'Carrots', 'Lettuce', 'Tomatoes', 'Onions', 'Potatoes', 'Spinach', 'Broccoli', 'Strawberries', 'Blueberries', 'Oranges', 'Grapes'],
+    'Meat': ['Chicken', 'Beef', 'Pork', 'Turkey', 'Lamb', 'Bacon', 'Sausage', 'Ham'],
+    'Seafood': ['Shrimp', 'Salmon', 'Tuna', 'Crab', 'Lobster', 'Cod', 'Tilapia'],
+    'Beverages': ['Water', 'Juice', 'Soda', 'Coffee', 'Tea', 'Milk', 'Beer', 'Wine'],
+    'Frozen Foods': ['Ice Cream', 'Frozen Pizza', 'Frozen Vegetables', 'Frozen Dinners', 'Frozen Fruit'],
+    'Pantry': ['Cereal', 'Pasta', 'Rice', 'Beans', 'Soup', 'Sauces', 'Spices', 'Oil', 'Vinegar', 'Flour', 'Sugar', 'Baking Soda', 'Baking Powder', 'Yeast'],
+    'Snacks': ['Chips', 'Crackers', 'Nuts', 'Popcorn', 'Cookies', 'Candy', 'Granola Bars'],
+    'Personal Care': ['Toothpaste', 'Shampoo', 'Soap', 'Deodorant', 'Toilet Paper', 'Paper Towels', 'Facial Tissue'],
+    'Household Supplies': ['Cleaning Supplies', 'Laundry Detergent', 'Trash Bags', 'Batteries', 'Light Bulbs', 'Dish Soap'],
+    'Baby Products': ['Diapers', 'Baby Food', 'Wipes', 'Baby Formula'],
+    'Pet Supplies': ['Dog Food', 'Cat Food', 'Cat Litter', 'Pet Toys', 'Pet Treats'],
+    'Deli': ['Sandwich Meat', 'Cheese Slices', 'Prepared Salads', 'Rotisserie Chicken'],
+    'Baking': ['Flour', 'Sugar', 'Baking Soda', 'Yeast', 'Chocolate Chips', 'Vanilla Extract'],
+    'Alcohol': ['Beer', 'Wine', 'Liquor', 'Champagne'],
+    'Canned Goods': ['Canned Vegetables', 'Canned Fruit', 'Tomato Sauce', 'Beans'],
+    'Seasonal': ['Holiday Decorations', 'Seasonal Candy', 'Seasonal Gifts'],
+    'Other': ['Miscellaneous Items']
   };
+
+  // Populate category select
+  populateCategories();
 
   categorySelect.addEventListener('change', () => {
     const selectedCategory = categorySelect.value;
@@ -29,6 +49,16 @@ async function init() {
       await loadItems();
     }
   });
+
+  function populateCategories() {
+    categorySelect.innerHTML = '<option value="" disabled selected>Select Category</option>';
+    for (const category in categories) {
+      const option = document.createElement('option');
+      option.value = category;
+      option.textContent = category;
+      categorySelect.appendChild(option);
+    }
+  }
 
   function populateItems(category) {
     itemSelect.innerHTML = '<option value="" disabled selected>Select Item</option>';
