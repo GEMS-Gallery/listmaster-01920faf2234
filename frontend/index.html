@@ -11,11 +11,13 @@
   <div class="container">
     <h1>Shopping List</h1>
     <form id="item-form">
-      <input type="text" id="item-input" placeholder="Add a new item..." required>
       <select id="category-select" required>
         <option value="" disabled selected>Select Category</option>
         <option value="Bakery">Bakery</option>
         <option value="Dairy">Dairy</option>
+      </select>
+      <select id="item-select" required>
+        <option value="" disabled selected>Select Item</option>
       </select>
       <button type="submit"><i class="fas fa-plus"></i></button>
     </form>

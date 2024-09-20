@@ -4,21 +4,43 @@ document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
   const form = document.getElementById('item-form');
-  const input = document.getElementById('item-input');
   const categorySelect = document.getElementById('category-select');
+  const itemSelect = document.getElementById('item-select');
   const list = document.getElementById('item-list');
+
+  const categories = {
+    'Bakery': ['Bread', 'Muffins', 'Hamburger Buns'],
+    'Dairy': ['Milk', 'Cheese']
+  };
+
+  categorySelect.addEventListener('change', () => {
+    const selectedCategory = categorySelect.value;
+    populateItems(selectedCategory);
+  });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const name = input.value.trim();
+    const name = itemSelect.value;
     const category = categorySelect.value;
     if (name && category) {
       await backend.addItem(name, category);
-      input.value = '';
-      categorySelect.selectedIndex = 0; // Reset to default option
+      categorySelect.selectedIndex = 0;
+      itemSelect.innerHTML = '<option value="" disabled selected>Select Item</option>';
       await loadItems();
     }
   });
+
+  function populateItems(category) {
+    itemSelect.innerHTML = '<option value="" disabled selected>Select Item</option>';
+    if (categories[category]) {
+      categories[category].forEach(itemName => {
+        const option = document.createElement('option');
+        option.value = itemName;
+        option.textContent = itemName;
+        itemSelect.appendChild(option);
+      });
+    }
+  }
 
   async function loadItems() {
     const items = await backend.getItems();

@@ -17,19 +17,20 @@ h1 {
 
 #item-form {
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 20px;
 }
 
-#item-input {
+#category-select,
+#item-select {
   flex: 1;
   padding: 10px;
   font-size: 16px;
+  margin-bottom: 10px;
 }
 
 #category-select {
-  padding: 10px;
-  font-size: 16px;
-  margin-left: 10px;
+  margin-right: 10px;
 }
 
 #item-form button {
