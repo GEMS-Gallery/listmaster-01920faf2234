@@ -12,13 +12,15 @@ actor {
   type Item = {
     id : Nat;
     name : Text;
+    category : Text;
     completed : Bool;
   };
 
-  public func addItem(name : Text) : async Item {
+  public func addItem(name : Text, category : Text) : async Item {
     let item = {
       id = nextId;
       name = name;
+      category = category;
       completed = false;
     };
     items := Array.append<Item>(items, [item]);
@@ -31,7 +33,7 @@ actor {
     items := Array.map<Item, Item>(items, func (item) {
       if (item.id == id) {
         found := true;
-        { id = item.id; name = item.name; completed = not item.completed };
+        { id = item.id; name = item.name; category = item.category; completed = not item.completed };
       } else {
         item;
       }

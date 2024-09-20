@@ -1,11 +1,12 @@
 type Item = 
  record {
+   category: text;
    completed: bool;
    id: nat;
    name: text;
  };
 service : {
-  addItem: (text) -> (Item);
+  addItem: (text, text) -> (Item);
   deleteItem: (nat) -> (bool);
   getItems: () -> (vec Item) query;
   markCompleted: (nat) -> (bool);
